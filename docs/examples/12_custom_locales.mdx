@@ -1,0 +1,54 @@
+---
+name: Custom locales
+menu: Examples
+route: /examples/custom-locales
+order: 12
+---
+
+import Calendar, { Sandbox } from "../demo";
+
+# Custom Locales
+
+For more information about the locales, see the [props#locale](/props#locale) section on locales.
+
+## French
+
+<Sandbox>
+  <Calendar locale="fr" />
+</Sandbox>
+
+```js
+<Calendar locale="fr" />
+```
+
+## Dutch
+
+<Sandbox>
+  <Calendar locale="nl" />
+</Sandbox>
+
+```js
+<Calendar locale="nl" />
+```
+
+## German
+
+<Sandbox>
+  <Calendar locale="de" />
+</Sandbox>
+
+```js
+<Calendar locale="de" />
+```
+
+## Any other valid locale from [date-fns](https://date-fns.org/v1.29.0/docs/I18n#supported-languages)
+
+This example uses the Italian locale.
+
+<Sandbox>
+  <Calendar locale={require("date-fns/locale/it")} />
+</Sandbox>
+
+```js
+<Calendar locale={require("date-fns/locale/it")} />
+```

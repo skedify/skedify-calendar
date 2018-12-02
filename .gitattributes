@@ -1,0 +1,13 @@
+# Set the default end_of_line handling in case people have no core.autocrlf set
+* text=auto eol=lf
+
+# Declare some file types which are definitely text.
+*.js text
+*.json text
+*.md text
+*.yml text
+*.yaml text
+LICENSE text
+
+# Declare types of files which are binary and which should not be modified
+*.ico binary

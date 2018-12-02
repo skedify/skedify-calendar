@@ -1,0 +1,26 @@
+---
+name: Scroll to time
+menu: Examples
+route: /examples/scroll-to-time
+order: 10
+---
+
+import Calendar, { Sandbox } from "../demo";
+
+# Scroll to time
+
+This will render the Calendar in the week of the `1st of January, 2001` and it will scroll to `07:30`.
+
+<Sandbox>
+  <Calendar
+    date={new Date(2001, 0, 1)}
+    scrollToTime={new Date(2001, 0, 1, 7, 30)}
+  />
+</Sandbox>
+
+```js
+<Calendar
+  date={new Date(2001, 0, 1)}
+  scrollToTime={new Date(2001, 0, 1, 7, 30)}
+/>
+```
