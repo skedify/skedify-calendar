@@ -12,6 +12,11 @@
 [![GitHub issues](https://img.shields.io/github/issues/skedify/skedify-calendar.svg)](https://github.com/skedify/skedify-calendar/issues)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
+## Documentation
+
+Documentation can be found here: https://skedify-calendar.now.sh/ (This is probably going to change very soon).
+You can also run `npm run start` to edit the documentation locally and see them update accordingly.
+
 ## Contributing
 
 Use `npm run commit` when you want to commit a change.
