@@ -1,0 +1,57 @@
+---
+name: Getting started
+route: /
+order: 0
+---
+
+# Getting started
+
+## Installation
+
+`npm install skedify-calendar`
+
+Or
+
+`yarn add skedify-calendar`
+
+## Usage
+
+If you are using ES Modules, you can import the default exported Calendar component.
+
+```js
+import Calendar from "skedify-calendar";
+import "skedify-calendar/lib/styles.css";
+
+render(<Calendar />);
+```
+
+If you need to use the umd build, you can do it like this.
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Your application</title>
+
+    <!-- The JavaScript -->
+    <script src="node_modules/skedify-calendar/lib/umd/skedify-calendar.js"></script>
+    <!-- Or -->
+    <script src="node_modules/skedify-calendar/lib/umd/skedify-calendar.min.js"></script>
+
+    <!-- The CSS -->
+    <link
+      href="node_modules/skedify-calendar/lib/styles.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Your content -->
+  </body>
+</html>
+```
+
+```js
+// SkedifyCalendar will be exposed by the umd build.
+render(<window.SkedifyCalendar />);
+```

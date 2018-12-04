@@ -1,0 +1,308 @@
+---
+name: Props
+route: /props
+order: 1
+---
+
+# Props
+
+Before we start, let's elaborate a few key concepts in the `Calendar` component.
+
+| Key     | Description                                                                                                   |
+| :------ | :------------------------------------------------------------------------------------------------------------ |
+| `Event` | When we talk about an `Event` or `Events` we are referring to a calendar event, not a browser event.          |
+| `Slot`  | When we talk about `slots` we are referring to a place on the grid. You can think of it as a `cell` in Excel. |
+
+## date
+
+- Type: `Date`
+- Default: `new Date()`
+
+The current date used to render the `Calendar`
+
+```js
+<Calendar date={new Date(1970, 1, 2, 3, 4, 5)} />
+```
+
+## events
+
+- Type: `Array`
+- Default: `[]`
+
+A list of events to render. Each event should have at least a `start` & `end` prop, e.g.: `{ start: new Date(), end: new Date() }`
+
+```js
+<Calendar events={[{ start: new Date(), end: new Date() }]} />
+```
+
+## locale
+
+- Type: `string | object`
+- Default: `"en"`
+
+For the default renderers (The calendar header and the calender day header), we require some localization.
+If you override those headers this value should not be set. We use [date-fns](https://date-fns.org/) for this so currently we either expect a string `"en", "nl", "fr" or "de"` or an actual `date-fns` locale.
+
+```js
+<Calendar locale="nl" />
+```
+
+## weekStartsOn
+
+- Type: `Calendar.MONDAY | Calendar.TUESDAY | Calendar.WEDNESDAY | Calendar.THURSDAY | Calendar.FRIDAY | Calendar.SATURDAY | Calendar.SUNDAY`
+- Default: `Calendar.MONDAY`
+
+This determines the beginning of the week.
+
+```js
+<Calendar weekStartsOn={Calendar.SUNDAY} />
+```
+
+## daysToRender
+
+- Type: `number`
+- Default: `7`
+
+How many days should be rendered.
+
+```js
+<Calendar daysToRender={5} />
+```
+
+## step
+
+- Type: `number`
+- Default: `30`
+
+The time in minutes for 1 slot.
+
+```js
+<Calendar step={15} />
+```
+
+## minTime
+
+- Type: `string`
+- Default: `"00:00:00"`
+
+The start time of the Calendar
+
+```js
+<Calendar minTime="06:00:00" />
+```
+
+## maxTime
+
+- Type: `string`
+- Default: `"24:00:00"`
+
+The end time of the Calendar
+
+```js
+<Calendar maxTime="17:00:00" />
+```
+
+## renderHeader
+
+- Type: `function`
+- Default: `Calendar.DEFAULT_RENDER_HEADER`
+
+If you don't want a header you can use this configuration:
+
+```js
+<Calendar renderHeader={() => null} />
+```
+
+If you do want a header, you get the `start` and the `end` of the current visible range.
+
+```js
+<Calendar
+  renderHeader={({ start, end }) => (
+    <div>
+      {start.toLocaleDateString()} - {end.toLocaleDateString()}
+    </div>
+  )}
+/>
+```
+
+## renderDayHeader
+
+- Type: `function`
+- Default: `Calendar.DEFAULT_RENDER_DAY_HEADER`
+
+If you don't want day headers you can use this configuration:
+
+```js
+<Calendar renderDayHeader={() => null} />
+```
+
+If you do want a day header, you get the `date` of the current rendered day.
+
+```js
+<Calendar renderDayHeader={date => <div>{start.toLocaleDateString()}</div>} />
+```
+
+## renderGutterItem
+
+- Type: `function`
+- Default: `Calendar.DEFAULT_RENDER_GUTTER_ITEM`
+
+If you don't want a gutter then you can use this configuration:
+
+```js
+<Calendar renderGutterItem={() => null} />
+```
+
+If you do want a gutter, you get the `time` object of the current slot, the `sizeOfOneSlot` which is the height of 1 slot and the `slotIndex`.
+
+```js
+<Calendar
+  renderGutterItem={({ time, sizeOfOneSlot, slotIndex }) => (
+    <div>{time.toLocaleTimeString()}</div>
+  )}
+/>
+```
+
+## onEventCreate
+
+- Type: `function`
+- Default: `undefined`
+
+If this function is not implemented, creatign new events is not possible.
+If you do want to make it possible to create new events, you must implement this method.
+
+This method will be called with the following properties:
+
+```js
+<Calendar
+  onEventCreate={({ start, end }) => {
+    // `start` is a date object with the start date/time
+    // `end` is a date object with the end date/time
+    // Update the state here
+    // Maybe call a function that posts this to your API
+  }}
+/>
+```
+
+## onEventUpdate
+
+- Type: `function`
+- Default: `undefined`
+
+If this function is not implemented, then **resizing** or **moving** an event is not possible.
+If you do want to make it possible to update events, you must implement this method.
+
+This method will be called with the following properties:
+
+```js
+<Calendar
+  onEventCreate={({ event, start, end }) => {
+    // `event` The event that we are going to update
+    // `start` is a date object with the new start date/time
+    // `end` is a date object with the new end date/time
+    // Update the state here
+    // Maybe call a function that calls your API to update this
+  }}
+/>
+```
+
+## onEventClick
+
+- Type: `function`
+- Default: `undefined`
+
+When this function is implemented, than this function will be called when you click on an event.
+
+```js
+<Calendar
+  onEventClick={event => {
+    // Do things with the event
+  }}
+/>
+```
+
+## canUpdateEvent
+
+- Type: `function`
+- Default: `({ event, start, end }) => true`
+
+While we are rendering events we will call this method to determine if we can update this event or not.
+For example, if you don't want to overlap events, you can return `true | false` based on this `event` and the new `start` & `end`.
+
+This information will also be available inside the [renderEvent](#renderevent) function.
+
+> **IMPORTANT:** This function will be called a lot of times. This means that this function should be as fast as possible. Don't make API requests in here to determine if we can update this event.
+
+```js
+<Calendar
+  canUpdateEvent={({ event, start, end }) => {
+    return Math.random() > 0.5; // Russian roulette style
+  }}
+/>
+```
+
+## canCreateEvent
+
+- Type: `function`
+- Default: `({ start, end }) => true`
+
+While we are rendering the new event placeholder we will call this method to determine if we can create this event or not.
+For example, if you don't want to overlap events, you can return `true | false` based on this `start` & `end` value.
+
+This information will also be available inside the [renderPlaceholder](#renderplaceholder) function.
+
+> **IMPORTANT:** This function will be called a lot of times. This means that this function should be as fast as possible. Don't make API requests in here to determine if we can create the new event.
+
+```js
+<Calendar
+  canCreateEvent={({ start, end }) => {
+    return Math.random() > 0.5; // Russian roulette style
+  }}
+/>
+```
+
+## renderEvent
+
+- Type: `function`
+- Default: `Calendar.DEFAULT_RENDER_EVENT`
+
+The `renderEvent` function receives 2 arguments, the first argument is the event itself.
+This is 1 item from your `events` prop, this will contain all of its information.
+
+The other argument is the `interactionInfo` object. This object includes useful information if you want to style your events differently based on this information.
+
+The following values are available:
+
+| Property             | Description                                                                                                                                            |
+| :------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `isInteractable`     | If you can interact with an event, then this will be `true`. This means that the [onEventUpdate](#oneventupdate) function has been implemented.        |
+| `isInteracting`      | If you are interacting with the current event, then this will be `true`. Possible interactions are when you move an event or when you resize an event. |
+| `isOtherInteracting` | If there is an event that is currently being interacted with, but it is not this event.                                                                |
+| `isPseudo`           | When you interact with an event, we will create a pseudo event. If this pseudo event is the current event, this boolean will be `true`.                |
+| `isUpdatingAllowed`  | If the event can be updated, see [canUpdateEvent](#canupdateevent) section then this value will be `true`.                                             |
+
+> **NOTE**: If you return `null` from this function, the event won't be rendered at all.
+
+```js
+<Calendar renderEvent={(event, interactionInfo) => <div>...</div>} />
+```
+
+## renderPlaceholder
+
+- Type: `function`
+- Default: `Calendar.DEFAULT_RENDER_PLACEHOLDER`
+
+The `renderEvent` function receives 2 arguments, the first argument is the event itself.
+This is 1 item from your `events` prop, this will contain all of its information.
+
+The other argument is the `interactionInfo` object. This object includes useful information if you want to style your events differently based on this information.
+
+The following values are available:
+
+| Property            | Description                                                                                                |
+| :------------------ | :--------------------------------------------------------------------------------------------------------- |
+| `isCreatingAllowed` | If the event can be created, see [canCreateEvent](#cancreateevent) section then this value will be `true`. |
+
+```js
+<Calendar renderPlaceholder={(event, interactionInfo) => <div>...</div>} />
+```

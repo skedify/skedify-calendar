@@ -1,0 +1,43 @@
+---
+name: Creating new events
+menu: Examples
+route: /examples/creating-new-events
+order: 4
+---
+
+import Calendar, { Sandbox } from "../demo";
+import Component from "@reach/component-component";
+
+# Creating new events
+
+<Sandbox>
+  <Component
+    initialState={{
+      events: []
+    }}
+  >
+    {({ setState, state }) => (
+      <Calendar
+        date={new Date(2001, 0, 1)}
+        onEventCreate={({ start, end }) => {
+          setState(state => ({
+            events: [...state.events, { start, end }]
+          }));
+        }}
+        events={state.events}
+      />
+    )}
+  </Component>
+</Sandbox>
+
+```js
+<Calendar
+  date={new Date(2001, 0, 1)}
+  onEventCreate={({ start, end }) => {
+    this.setState(state => ({
+      events: [...state.events, { start, end }]
+    }));
+  }}
+  events={this.state.events}
+/>
+```

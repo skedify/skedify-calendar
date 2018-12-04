@@ -1,0 +1,46 @@
+---
+name: With a custom header
+menu: Examples
+route: /examples/with-a-custom-header
+order: 21
+---
+
+import Calendar, { Sandbox } from "../demo";
+
+# With a custom header
+
+<Sandbox>
+  <Calendar
+    renderHeader={({ start, end }) => (
+      <div
+        style={{
+          padding: 24,
+          fontSize: 24,
+          textAlign: "center",
+          borderBottom: "1px solid #e0e0e0",
+          fontWeight: "bold"
+        }}
+      >
+        {start.toLocaleDateString()} - {end.toLocaleDateString()}
+      </div>
+    )}
+  />
+</Sandbox>
+
+```js
+<Calendar
+  renderHeader={({ start, end }) => (
+    <div
+      style={{
+        padding: 24,
+        fontSize: 24,
+        textAlign: "center",
+        borderBottom: "1px solid #e0e0e0",
+        fontWeight: "bold"
+      }}
+    >
+      {start.toLocaleDateString()} - {end.toLocaleDateString()}
+    </div>
+  )}
+/>
+```
