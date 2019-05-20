@@ -62,6 +62,10 @@ const DAY_MAP = {
 const DEFAULT_SLOT_HEIGHT = 20;
 const ONE_WEEK = 7;
 
+function hasTimeChanged(start1, end1, start2, end2) {
+  return `${start1}` !== `${start2}` || `${end1}` !== `${end2}`;
+}
+
 class Calendar extends Component {
   static MONDAY = MONDAY;
   static TUESDAY = TUESDAY;
@@ -293,7 +297,10 @@ class Calendar extends Component {
     } else if (isFunction(onEventClick) && !isDirty) {
       // It is the same start & end, so we probably wanted a click...
       onEventClick(event);
-    } else if (canUpdateEvent({ event, start, end })) {
+    } else if (
+      hasTimeChanged(event.start, event.end, start, end) &&
+      canUpdateEvent({ event, start, end })
+    ) {
       // We do have an existing event
       // Let's update it
       onEventUpdate({
@@ -371,7 +378,6 @@ class Calendar extends Component {
       renderGutterItem,
       renderEvent,
       renderPlaceholder,
-      onEventClick,
       daysToRender,
       minTime,
       locale,
@@ -567,7 +573,6 @@ class Calendar extends Component {
                               <Event
                                 key={event.id || eventIndex} // assuming an id exist on the event, if not, use the index
                                 event={event}
-                                onEventClick={onEventClick}
                                 interactionInfo={
                                   event === pseudoEvent &&
                                   event.isPlaceholderEvent
