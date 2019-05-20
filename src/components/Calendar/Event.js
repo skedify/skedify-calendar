@@ -4,7 +4,7 @@ import { isFunction } from '../../utils/isFunction';
 
 import { DragHandle } from './DragHandle';
 
-function EventWrapper({ children, positionTop, height, onEventClick }) {
+function EventWrapper({ children, positionTop, height }) {
   return (
     <div
       className="SkedifyCalendar__EventWrapper"
@@ -12,7 +12,6 @@ function EventWrapper({ children, positionTop, height, onEventClick }) {
         transform: `translateY(${positionTop}px)`,
         height,
       }}
-      onClick={onEventClick}
     >
       {children}
     </div>
@@ -25,29 +24,20 @@ function EventComponent({
   render,
   positionTop,
   height,
-  onEventClick,
   interactionInfo,
 }) {
   const shouldBeInteractable = isFunction(onActivate);
 
   if (!shouldBeInteractable) {
     return (
-      <EventWrapper
-        onEventClick={() => onEventClick(event)}
-        positionTop={positionTop}
-        height={height}
-      >
+      <EventWrapper positionTop={positionTop} height={height}>
         {render(event, interactionInfo)}
       </EventWrapper>
     );
   }
 
   return (
-    <EventWrapper
-      onEventClick={() => onEventClick(event)}
-      positionTop={positionTop}
-      height={height}
-    >
+    <EventWrapper positionTop={positionTop} height={height}>
       <DragHandle
         placement={DragHandle.PLACEMENT_TOP}
         onActivate={onActivate(event, DragHandle.PLACEMENT_TOP)}
