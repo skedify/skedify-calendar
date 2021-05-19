@@ -50,14 +50,10 @@
     "lib"
   ],
   "license": "MIT",
-  "dependencies": {
-    "date-fns": "^1.29.0",
-    "docz": "^0.12.13",
-    "uuid": "^3.3.2"
-  },
   "peerDependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "uuid": ">=8",
+    "date-fns": ">=2",
+    "react": ">=16"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.0.0",
@@ -71,6 +67,8 @@
     "commitizen": "^3.0.5",
     "cross-env": "^5.2.0",
     "cz-conventional-changelog": "^2.1.0",
+    "date-fns": "^2.21.3",
+    "docz": "^0.12.13",
     "docz-plugin-css": "^0.11.0",
     "eslint": "^5.9.0",
     "eslint-config-prettier": "^3.3.0",
@@ -87,11 +85,15 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "semantic-release": "^15.12.3",
-    "travis-deploy-once": "^5.0.9"
+    "travis-deploy-once": "^5.0.9",
+    "uuid": "^8.3.2"
   },
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
+  },
+  "volta": {
+    "node": "10.24.1"
   }
 }

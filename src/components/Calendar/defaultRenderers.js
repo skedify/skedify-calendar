@@ -16,20 +16,20 @@ export const DEFAULT_RENDER_HEADER = ({ start, end }) => (
     {locale => (
       <div className="SkedifyCalendar__Header">
         {isSameDay(start, end) ? (
-          format(start, 'DD MMMM YYYY')
+          format(start, 'dd LLLL yyyy')
         ) : (
           <React.Fragment>
             {format(
               start,
               isSameYear(start, end)
                 ? isSameMonth(start, end)
-                  ? 'DD'
-                  : 'DD MMMM'
-                : 'DD MMMM YYYY',
+                  ? 'dd'
+                  : 'dd LLLL'
+                : 'dd LLLL yyyy',
               { locale }
             )}
             {' - '}
-            {format(end, 'DD MMMM YYYY', { locale })}
+            {format(end, 'dd LLLL yyyy', { locale })}
           </React.Fragment>
         )}
       </div>
@@ -41,7 +41,7 @@ export const DEFAULT_RENDER_DAY_HEADER = date => (
   <LocaleContext.Consumer>
     {locale => (
       <div className="SkedifyCalendar__WeekHeader__Days__Day">
-        {format(date, 'dddd DD/MM', { locale })}
+        {format(date, 'iiii dd/LL', { locale })}
       </div>
     )}
   </LocaleContext.Consumer>

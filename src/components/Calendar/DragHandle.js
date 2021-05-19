@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import uuid from 'uuid';
+import { v4 as uuid } from 'uuid';
 import { isFunction } from '../../utils/isFunction';
 
 const PLACEMENT_TOP = uuid();
