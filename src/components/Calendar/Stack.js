@@ -1,5 +1,5 @@
 import React from 'react';
-import uuid from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 export const DIRECTION = {
   HORIZONTAL_REVERSE: uuid(),

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import uuid from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 import {
   startOfWeek,
@@ -514,7 +514,10 @@ class Calendar extends Component {
                           ref={gutterRef}
                           slotsToRender={slotsToRender}
                           sizeOfOneSlot={sizeOfOneSlot}
-                          startTime={format(startTime)}
+                          startTime={format(
+                            startTime,
+                            `yyyy-MM-dd'T'HH:mm:ss.SSSxxx`
+                          )}
                           step={step}
                           render={renderGutterItem}
                         />

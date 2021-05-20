@@ -1,7 +1,7 @@
 import React, { memo, forwardRef } from 'react';
 import { Stack } from './Stack';
 import { range } from '../../utils/range';
-import { addMinutes } from 'date-fns';
+import { addMinutes, parseISO } from 'date-fns';
 
 function GutterComponent(
   { slotsToRender, sizeOfOneSlot, startTime, step, render },
@@ -15,7 +15,7 @@ function GutterComponent(
       className="SkedifyCalendar__Gutter"
     >
       {range(slotsToRender).map(slotIndex => {
-        const time = addMinutes(startTime, slotIndex * step);
+        const time = addMinutes(parseISO(startTime), slotIndex * step);
 
         return (
           <div
