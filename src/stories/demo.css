@@ -1,0 +1,19 @@
+.Demo__ListOfEvents {
+  width: 350px;
+  margin-left: 12px;
+  background: #fafafa;
+  padding: 12px;
+  box-sizing: border-box;
+  overflow: auto;
+  border: 1px solid #e0e0e0;
+}
+
+.Demo__ListOfEvents__Snippet {
+  font-size: 10px;
+  padding: 0;
+  margin: 0;
+}
+
+.SkedifyCalendar {
+  background: wheat;
+}
