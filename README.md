@@ -1,3 +1,6 @@
+# ⚠️ Deprecated in favour of the monorepo setup!
+New development will continue at an internal private repo: https://github.com/skedify/frontend-mono/tree/develop/packages/skedify-calendar
+
 # Skedify Calendar
 
 > Skedify Calendar React component
