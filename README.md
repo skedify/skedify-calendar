@@ -5,6 +5,9 @@ New development will continue at an internal private repo: https://github.com/sk
 
 > Skedify Calendar React component
 
+TODO: move `docs` into `storybook`.
+TODO update readme.
+
 **Release:**
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/skedify/skedify-calendar/develop/LICENSE)
 [![npm](https://img.shields.io/npm/v/skedify-calendar.svg)](https://www.npmjs.com/package/skedify-calendar)
