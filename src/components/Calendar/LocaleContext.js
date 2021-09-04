@@ -1,13 +1,11 @@
 import { createContext } from 'react';
 
-import german from 'date-fns/locale/de';
-import french from 'date-fns/locale/fr';
-import dutch from 'date-fns/locale/nl';
+import { nl, fr, de } from 'date-fns/locale';
 
 const AVAILABLE_LOCALES = {
-  de: german,
-  fr: french,
-  nl: dutch,
+  de,
+  fr,
+  nl,
 };
 
 const DEFAULT_LOCALE = undefined; // The default for date-fns will be english anyway

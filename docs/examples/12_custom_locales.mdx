@@ -6,6 +6,7 @@ order: 12
 ---
 
 import Calendar, { Sandbox } from "../demo";
+import { it } from 'date-fns/locale';
 
 # Custom Locales
 
@@ -46,9 +47,11 @@ For more information about the locales, see the [props#locale](/props#locale) se
 This example uses the Italian locale.
 
 <Sandbox>
-  <Calendar locale={require("date-fns/locale/it")} />
+  <Calendar locale={it} />
 </Sandbox>
 
 ```js
-<Calendar locale={require("date-fns/locale/it")} />
+import { it } from 'date-fns/locale';
+
+<Calendar locale={it} />
 ```

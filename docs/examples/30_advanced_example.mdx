@@ -5,7 +5,7 @@ route: /examples/advanced-example
 order: 30
 ---
 
-import { format, areRangesOverlapping } from "date-fns";
+import { format, areIntervalsOverlapping } from "date-fns";
 import Calendar, { Sandbox, EventCapturer } from "../demo";
 import Component from "@reach/component-component";
 
@@ -42,7 +42,7 @@ The things that you could do:
             renderHeader={() => null}
             renderDayHeader={date => (
               <div className="SkedifyCalendar__WeekHeader__Days__Day">
-                {format(date, "dddd")}
+                {format(date, "iiii")}
               </div>
             )}
             onEventClick={event => capture("onEventClick", event)}
@@ -114,7 +114,7 @@ The things that you could do:
                   return false;
                 }
 
-                return areRangesOverlapping(
+                return areIntervalsOverlapping(
                   storedEvent.start,
                   storedEvent.end,
                   start,
@@ -125,7 +125,7 @@ The things that you could do:
             canCreateEvent={({ start, end }) => {
               // We don't allow overlapping events
               return !state.events.some(event =>
-                areRangesOverlapping(event.start, event.end, start, end)
+                areIntervalsOverlapping(event.start, event.end, start, end)
               );
             }}
             events={state.events}
@@ -146,7 +146,7 @@ The things that you could do:
   renderHeader={() => null}
   renderDayHeader={date => (
     <div className="SkedifyCalendar__WeekHeader__Days__Day">
-      {format(date, "dddd")}
+      {format(date, "iiii")}
     </div>
   )}
   onEventClick={event => console.log("onEventClick", event)}
@@ -216,7 +216,7 @@ The things that you could do:
         return false;
       }
 
-      return areRangesOverlapping(
+      return areIntervalsOverlapping(
         storedEvent.start,
         storedEvent.end,
         start,
@@ -227,7 +227,7 @@ The things that you could do:
   canCreateEvent={({ start, end }) => {
     // We don't allow overlapping events
     return !this.state.events.some(event =>
-      areRangesOverlapping(event.start, event.end, start, end)
+      areIntervalsOverlapping(event.start, event.end, start, end)
     );
   }}
   events={this.state.events}
